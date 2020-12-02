@@ -4,14 +4,14 @@ function day1() {
 	const
 		expenses = [],
 		inds = [0],
-		attempt = () => (expenses[inds[0]] + expenses[inds[2]] - 2020) * dir
+		attempt = () => (2020 - expenses[inds[0]] - expenses[inds[2]]) * dir
 	let n, dir = 1
 	for (;;) {
 		n = readline()
 		if (n == null) break
 		expenses.push(+n)
 	}
-	expenses.sort((a, b) => b - a)
+	expenses.sort((a, b) => a - b)
 	inds[2] = expenses.length - 1
 	for (;;) {
 		while (attempt() > 0)

@@ -4,7 +4,7 @@ function input(name) {
 	return require("fs").readFileSync(`${name}.in`, {encoding: "latin1"}).split("\n")
 }
 
-function day1() {
+function day1_1() {
 	const
 		expenses = input(1),
 		inds = [0],
@@ -21,7 +21,7 @@ function day1() {
 	}
 }
 
-function day2() {
+function day1_2() {
 	const
 		expenses = input(1),
 		inds = [0, 1],
@@ -40,5 +40,24 @@ function day2() {
 	}
 }
 
-console.log(day1())
-console.log(day2())
+function day2_1() {
+	return input(2).filter(l => {
+		const
+			[, lo, hi, c, pass] = /(\d+)-(\d+) (.): (.*)/.exec(l),
+			n = pass.split(c).length - 1
+		return lo <= n && n <= hi
+	}).length
+}
+
+function day2_2() {
+	return input(2).filter(l =>
+		(([, i, j, c, pass]) =>
+			(pass[i - 1] == c) ^ (pass[j - 1] == c)
+		)(/(\d+)-(\d+) (.): (.*)/.exec(l))
+	).length
+}
+
+console.log(day1_1())
+console.log(day1_2())
+console.log(day2_1())
+console.log(day2_2())

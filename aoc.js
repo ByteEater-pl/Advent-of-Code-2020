@@ -60,8 +60,8 @@ function day2_2() {
 function day3_1() {
 	const grid = input(3)
 	let
-		c = 0,
-		n = 0
+		n = 0,
+		c = 0
 	for (const row of grid) {
 		n += row[c] == "#"
 		c = (c + 3) % grid[0].length
@@ -69,8 +69,22 @@ function day3_1() {
 	return n
 }
 
+function day3_2() {
+	const grid = input(3)
+	return [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]].reduce((a, [h, v]) => {
+		let
+			n = 0,
+			c = 0,
+			r = 0
+		while ((r += v) < grid.length)
+			n += grid[r][c = (c + h) % grid[0].length] == "#"
+		return a * n
+	}, 1)
+}
+
 console.log(day1_1())
 console.log(day1_2())
 console.log(day2_1())
 console.log(day2_2())
 console.log(day3_1())
+console.log(day3_2())

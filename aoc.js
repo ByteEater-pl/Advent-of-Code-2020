@@ -57,7 +57,20 @@ function day2_2() {
 	).length
 }
 
+function day3_1() {
+	const grid = input(3)
+	let
+		c = 0,
+		n = 0
+	for (const row of grid) {
+		n += row[c] == "#"
+		c = (c + 3) % grid[0].length
+	}
+	return n
+}
+
 console.log(day1_1())
 console.log(day1_2())
 console.log(day2_1())
 console.log(day2_2())
+console.log(day3_1())

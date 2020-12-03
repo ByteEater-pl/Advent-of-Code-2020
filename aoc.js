@@ -1,7 +1,9 @@
 "use strict"
 
+const fs = require("fs") 
+
 function input(name) {
-	return require("fs").readFileSync(`${name}.in`, {encoding: "latin1"}).split("\n")
+	return fs.readFileSync(`${name}.in`, {encoding: "latin1"}).split("\n")
 }
 
 function day1_1() {

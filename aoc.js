@@ -104,7 +104,8 @@ function day4_2() {
 				["ecl", /^(amb|blu|brn|gry|grn|hzl|oth)$/],
 				["pid", /(^\d{9}$)/]
 			].every(([field, re, test = x => x]) =>
-				test.apply(0, re.exec([...doc.matchAll(/(\S*?):(\S*)/g)]
+				test.apply(0,
+					re.exec([...doc.matchAll(/(\S*?):(\S*)/g)]
 					.find(x => x[1] == field)
 					?.[2])?.slice(1))))
 		.length

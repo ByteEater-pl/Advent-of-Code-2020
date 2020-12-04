@@ -88,7 +88,7 @@ function day4_1() {
 	return input(4, "\n\n")
 		.filter(doc =>
 			["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
-				.every(key => doc.includes(`${key}:`)))
+			.every(key => doc.includes(`${key}:`)))
 		.length
 }
 

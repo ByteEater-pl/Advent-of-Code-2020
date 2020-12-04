@@ -92,6 +92,24 @@ function day4_1() {
 		.length
 }
 
+function day4_2() {
+	return input(4, "\n\n")
+		.filter(doc => [
+				["byr", /^(\d{4})$/, v => 1920 <= v && v <= 2002],
+				["iyr", /^(\d{4})$/, v => 2010 <= v && v <= 2020],
+				["eyr", /^(\d{4})$/, v => 2020 <= v && v <= 2030],
+				["hgt", /^(\d+)cm$|^(\d+)in$/, (c, i) =>
+					150 <= c && c <= 193 || 59 <= i && i <= 76],
+				["hcl", /(^#[\da-f]{6}$)/],
+				["ecl", /^(amb|blu|brn|gry|grn|hzl|oth)$/],
+				["pid", /(^\d{9}$)/]
+			].every(([field, re, test = x => x]) =>
+				test.apply(0, re.exec([...doc.matchAll(/(\S*?):(\S*)/g)]
+					.find(x => x[1] == field)
+					?.[2])?.slice(1))))
+		.length
+}
+
 console.log(day1_1())
 console.log(day1_2())
 console.log(day2_1())
@@ -99,3 +117,4 @@ console.log(day2_2())
 console.log(day3_1())
 console.log(day3_2())
 console.log(day4_1())
+console.log(day4_2())

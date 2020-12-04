@@ -2,8 +2,8 @@
 
 const fs = require("fs") 
 
-function input(name) {
-	return fs.readFileSync(`${name}.in`, {encoding: "latin1"}).split("\n")
+function input(name, delim = "\n") {
+	return fs.readFileSync(`${name}.in`, {encoding: "latin1"}).split(delim)
 }
 
 function day1_1() {
@@ -84,9 +84,18 @@ function day3_2() {
 	}, 1)
 }
 
+function day4_1() {
+	return input(4, "\n\n")
+		.filter(doc =>
+			["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
+				.every(key => doc.includes(`${key}:`)))
+		.length
+}
+
 console.log(day1_1())
 console.log(day1_2())
 console.log(day2_1())
 console.log(day2_2())
 console.log(day3_1())
 console.log(day3_2())
+console.log(day4_1())

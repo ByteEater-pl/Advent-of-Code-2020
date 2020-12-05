@@ -111,6 +111,26 @@ function day4_2() {
 		.length
 }
 
+function day5_1() {
+	return parseInt(Math.max(...input(5).map(l =>
+		l.replace(/./g, c => ({F: 0, B: 1, L: 0, R: 1})[c]))), 2)
+}
+
+function day5_2() {
+	const
+		list =
+			input(5)
+			.map(l => l.replace(/./g, c => ({F: 0, B: 1, L: 0, R: 1})[c]))
+			.sort()
+			.map(ID => parseInt(ID, 2)),
+		bounds = [0, list.length - 1]
+	while (bounds[0] < bounds[1] - 1) {
+		const m = bounds[0] + bounds[1] >> 1
+		bounds[+(list[m] > list[bounds[0]] + m - bounds[0])] = m
+	}
+	return list[bounds[0]] + 1
+}
+
 console.log(day1_1())
 console.log(day1_2())
 console.log(day2_1())
@@ -119,3 +139,5 @@ console.log(day3_1())
 console.log(day3_2())
 console.log(day4_1())
 console.log(day4_2())
+console.log(day5_1())
+console.log(day5_2())

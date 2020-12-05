@@ -117,18 +117,16 @@ function day5_1() {
 }
 
 function day5_2() {
-	const
+	let
 		list =
 			input(5)
 			.map(l => l.replace(/./g, c => ({F: 0, B: 1, L: 0, R: 1})[c]))
 			.sort()
 			.map(ID => parseInt(ID, 2)),
-		bounds = [0, list.length - 1]
-	while (bounds[0] < bounds[1] - 1) {
-		const m = bounds[0] + bounds[1] >> 1
-		bounds[+(list[m] > list[bounds[0]] + m - bounds[0])] = m
-	}
-	return list[bounds[0]] + 1
+		m
+	while (m = list.length >> 1)
+		list.splice(m * (list[m] > list[0] + m), m)
+	return list[0] + 1
 }
 
 console.log(day1_1())

@@ -135,6 +135,14 @@ function day6_1() {
 		.reduce((a, b) => a + b, 0)
 }
 
+function day6_2() {
+	return input(6, "\n\n")
+		.map(group => group
+			.split("\n")
+			.reduce((a, x) => [...a].filter(e => x.includes(e))))
+		.reduce((a, b) => a + b.length, 0)
+}
+
 console.log(day1_1())
 console.log(day1_2())
 console.log(day2_1())
@@ -146,3 +154,4 @@ console.log(day4_2())
 console.log(day5_1())
 console.log(day5_2())
 console.log(day6_1())
+console.log(day6_2())

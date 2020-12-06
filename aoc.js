@@ -139,7 +139,7 @@ function day6_2() {
 	return input(6, "\n\n")
 		.map(group => group
 			.split("\n")
-			.reduce((a, x) => [...a].filter(e => x.includes(e))))
+			.reduce((a, x) => [...x].filter(e => a.includes(e))))
 		.reduce((a, b) => a + b.length, 0)
 }
 

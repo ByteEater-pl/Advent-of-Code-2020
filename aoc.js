@@ -129,6 +129,12 @@ function day5_2() {
 	return list[0] + 1
 }
 
+function day6_1() {
+	return input(6, "\n\n")
+		.map(group => new Set(group.split(/\n?/)).size)
+		.reduce((a, b) => a + b, 0)
+}
+
 console.log(day1_1())
 console.log(day1_2())
 console.log(day2_1())
@@ -139,3 +145,4 @@ console.log(day4_1())
 console.log(day4_2())
 console.log(day5_1())
 console.log(day5_2())
+console.log(day6_1())

@@ -143,6 +143,30 @@ function day6_2() {
 		.reduce((a, b) => a + b.length, 0)
 }
 
+function day7_1() {
+	const graph = new Map
+	for (const l of input(7)) {
+		const [[u], ...o] = l.matchAll(/(^|\d )(\S* \S*)/g)
+		for (const [,, v] of o)
+			graph.set(v, (graph.get(v) || new Set).add(u))
+	}
+	let n = 0
+	function dfs(c, init) {
+		const v = graph.get(c)
+		if (v) {
+			if (!v.visited) {
+				n += v.visited = !init
+				for (const e of v) dfs(e)
+			}
+		} else {
+			n++
+			graph.set(c, {visited: true})
+		}
+	}
+	dfs("shiny gold", true)
+	return n
+}
+
 console.log(day1_1())
 console.log(day1_2())
 console.log(day2_1())
@@ -155,3 +179,4 @@ console.log(day5_1())
 console.log(day5_2())
 console.log(day6_1())
 console.log(day6_2())
+console.log(day7_1())

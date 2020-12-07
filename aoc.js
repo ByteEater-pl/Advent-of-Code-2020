@@ -150,12 +150,13 @@ function day7_1() {
 		for (const [,, v] of o)
 			graph.set(v, (graph.get(v) || new Set).add(u))
 	}
-	let n = 0
-	function dfs(c, init) {
+	let n = -1
+	function dfs(c) {
 		const v = graph.get(c)
 		if (v) {
 			if (!v.visited) {
-				n += v.visited = !init
+				n++
+				v.visited = true
 				for (const e of v) dfs(e)
 			}
 		} else {
@@ -163,7 +164,7 @@ function day7_1() {
 			graph.set(c, {visited: true})
 		}
 	}
-	dfs("shiny gold", true)
+	dfs("shiny gold")
 	return n
 }
 

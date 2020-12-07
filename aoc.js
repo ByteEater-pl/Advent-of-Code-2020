@@ -180,7 +180,7 @@ function day7_2() {
 		const v = graph.get(c)
 		if (v) {
 			for (const [n, u] of v)
-				a += n * (u ? sum(u) : 1)
+				a += n * sum(u)
 			graph.set(v, a)
 		}
 		return a

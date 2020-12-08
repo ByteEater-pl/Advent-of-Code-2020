@@ -208,8 +208,7 @@ function day8_2() {
 	const
 		code = input(8).map(l => l.split(" ")),
 		edit = {jmp: "nop", nop: "jmp"}
-	for (const instr of code) {
-		if (instr[0] == "acc") continue
+	for (const instr of code) if (instr[0] != "acc") {
 		instr[0] = edit[instr[0]]
 		let
 			a = 0,
@@ -244,4 +243,5 @@ console.log(
 	day7_1(),
 	day7_2(),
 	day8_1(),
-	day8_2())
+	day8_2()
+)

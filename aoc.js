@@ -204,6 +204,30 @@ function day8_1() {
 	return a
 }
 
+function day8_2() {
+	const
+		code = input(8).map(l => l.split(" ")),
+		edit = {jmp: "nop", nop: "jmp"}
+	for (const instr of code) {
+		if (instr[0] == "acc") continue
+		instr[0] = edit[instr[0]]
+		let
+			a = 0,
+			ip = 0,
+			run = new Set
+		do {
+			run.add(ip)
+			!{
+				acc() { a += +code[ip][1] },
+				jmp() { ip += +code[ip][1] - 1 }
+			}?.[code[ip][0]]?.()
+			ip++
+			if (ip == code.length) return a
+		} while (!run.has(ip))	
+		instr[0] = edit[instr[0]]
+	}
+}
+
 console.log(day1_1())
 console.log(day1_2())
 console.log(day2_1())
@@ -219,3 +243,4 @@ console.log(day6_2())
 console.log(day7_1())
 console.log(day7_2())
 console.log(day8_1())
+console.log(day8_2())

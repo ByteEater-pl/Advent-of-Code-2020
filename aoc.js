@@ -188,6 +188,22 @@ function day7_2() {
 	return sum("shiny gold") - 1
 }
 
+function day8_1() {
+	const code = input(8).map(l => l.split(" "))
+	let
+		a = 0,
+		ip = 0
+	do {
+		code[ip][2] = true
+		!{
+			acc() { a += +code[ip][1] },
+			jmp() { ip += +code[ip][1] - 1 }
+		}?.[code[ip][0]]?.()
+		ip++
+	} while (!code[ip][2])
+	return a
+}
+
 console.log(day1_1())
 console.log(day1_2())
 console.log(day2_1())
@@ -202,3 +218,4 @@ console.log(day6_1())
 console.log(day6_2())
 console.log(day7_1())
 console.log(day7_2())
+console.log(day8_1())

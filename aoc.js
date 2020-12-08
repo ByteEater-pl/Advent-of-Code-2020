@@ -146,13 +146,13 @@ function day6_2() {
 function day7_1() {
 	const graph = new Map
 	for (const l of input(7)) {
-		const [[u], ...o] = l.matchAll(/(^|\d )(\S* \S*)/g)
-		for (const [,, v] of o)
+		const [[u], ...succs] = l.matchAll(/(^|\d )(\S* \S*)/g)
+		for (const [,, v] of succs)
 			graph.set(v, (graph.get(v) || new Set).add(u))
 	}
 	let n = -1
-	function dfs(c) {
-		const v = graph.get(c)
+	function dfs(colour) {
+		const v = graph.get(colour)
 		if (v) {
 			if (!v.visited) {
 				n++
@@ -161,7 +161,7 @@ function day7_1() {
 			}
 		} else {
 			n++
-			graph.set(c, {visited: true})
+			graph.set(colour, {visited: true})
 		}
 	}
 	dfs("shiny gold")
@@ -171,19 +171,19 @@ function day7_1() {
 function day7_2() {
 	const graph = new Map
 	for (const l of input(7)) {
-		const [[u], ...o] = l.matchAll(/(^|\d )(\S* \S*)/g)
-		for (const [, n, v] of o)
+		const [[u], ...succs] = l.matchAll(/(^|\d )(\S* \S*)/g)
+		for (const [, n, v] of succs)
 			graph.set(u, (graph.get(u) || new Set).add([n, v]))
 	}
-	function sum(c) {
-		let a = 1
-		const v = graph.get(c)
+	function sum(colour) {
+		let acc = 1
+		const v = graph.get(colour)
 		if (v) {
 			for (const [n, u] of v)
-				a += n * sum(u)
-			graph.set(v, a)
+				acc += n * sum(u)
+			graph.set(v, acc)
 		}
-		return a
+		return acc
 	}
 	return sum("shiny gold") - 1
 }

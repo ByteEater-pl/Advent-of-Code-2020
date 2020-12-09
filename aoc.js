@@ -253,7 +253,7 @@ function day9_2() {
 			acc = +acc + +n
 			if (acc > invalid) break
 			if (acc == invalid) {
-				const range = list.slice(i, i + j + 1)
+				const range = list.splice(i, j + 1)
 				return Math.min(...range) + Math.max(...range)
 			}
 		}

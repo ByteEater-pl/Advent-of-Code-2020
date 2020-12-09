@@ -227,6 +227,23 @@ function day8_2() {
 	}
 }
 
+function day9_1() {
+	const
+		window = [],
+		sums = []
+	for (let [i, n] of input(9).entries()) {
+		n = +n
+		if (i > 24) {
+			if (!sums.flat().includes(n)) return n
+			sums.shift()
+			for (const row of sums) row.shift()
+			window.shift()
+		}
+		sums.push(window.map(k => k + n))
+		window.push(n)
+	}
+}
+
 console.log(
 	day1_1(),
 	day1_2(),
@@ -243,5 +260,6 @@ console.log(
 	day7_1(),
 	day7_2(),
 	day8_1(),
-	day8_2()
+	day8_2(),
+	day9_1()
 )

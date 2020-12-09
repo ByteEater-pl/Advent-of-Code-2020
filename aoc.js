@@ -235,9 +235,7 @@ function day9_1() {
 		n = +n
 		if (i > 24) {
 			if (!sums.flat().includes(n)) return n
-			sums.shift()
-			for (const row of sums) row.shift()
-			window.shift()
+			for (const x of [sums, ...sums, window]) x.shift()
 		}
 		sums.push(window.map(k => k + n))
 		window.push(n)

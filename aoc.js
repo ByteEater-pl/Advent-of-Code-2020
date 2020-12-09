@@ -244,6 +244,21 @@ function day9_1() {
 	}
 }
 
+function day9_2() {
+	const
+		list = input(9),
+		invalid = day9_1()
+	for (let [i, acc] of list.entries())
+		for (const [j, n] of list.slice(i + 1).entries()) {
+			acc = +acc + +n
+			if (acc > invalid) break
+			if (acc == invalid) {
+				const range = list.slice(i, i + j + 1)
+				return Math.min(...range) + Math.max(...range)
+			}
+		}
+}
+
 console.log(
 	day1_1(),
 	day1_2(),
@@ -261,5 +276,6 @@ console.log(
 	day7_2(),
 	day8_1(),
 	day8_2(),
-	day9_1()
+	day9_1(),
+	day9_2()
 )

@@ -257,6 +257,15 @@ function day9_2() {
 		}
 }
 
+function day10_1() {
+	const
+		counters = [, 0,, 1],
+		ratings = input(10).sort((a, b) => a - b)
+	for (const [i, next] of ratings.entries())
+		counters[next - (i && ratings[i - 1])]++
+	return counters[1] * counters[3]
+}
+
 console.log(
 	day1_1(),
 	day1_2(),
@@ -275,5 +284,6 @@ console.log(
 	day8_1(),
 	day8_2(),
 	day9_1(),
-	day9_2()
+	day9_2(),
+	day10_1()
 )

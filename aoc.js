@@ -270,14 +270,12 @@ function day10_2() {
 	const
 		ratings = input(10).sort((a, b) => a - b),
 		arrangements = [1]
-	for (const [i, joltage] of ratings.entries()) {
-		let acc = 0
-		for (const [j, n] of arrangements.entries())
+	for (const [i, joltage] of ratings.entries())
+		arrangements.unshift(arrangements.reduce((a, n, j) => a + (
 			joltage - [ratings[i - j - 1]] > 3
-			? arrangements.splice(j)
-			: acc += n
-		arrangements.unshift(acc)
-	}
+			? arrangements.splice(j) & 0
+			: n
+		), 0))
 	return arrangements[0]
 }
 

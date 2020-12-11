@@ -279,6 +279,33 @@ function day10_2() {
 	return arrangements[0]
 }
 
+function day11_1() {
+	const map = input(11)
+	let flag
+	while (!flag) {
+		flag = true
+		for (const [i, [...row]] of map.entries()) {
+			for (const [j, c] of row.entries()) if (c != ".") {
+				const
+					n = "011122222"[Array(9).fill()
+						.filter((_, x) =>
+							x != 4 &&
+							"#0".includes(
+								map?.[i + x % 3 - 1]?.[j + ~~(x / 3) % 3 - 1]))
+						.length]
+				if (`#${c}L`[n] != c) {
+					row[j] = "1_0"[n]
+					flag = false
+				}
+			}
+			map[i] = row
+		}
+		for (const [i, row] of map.entries())
+			map[i] = row.join("").replace(/\d/g, c => "L#"[c])
+	}
+	return map.join().split("#").length - 1
+}
+
 console.log(
 	day1_1(),
 	day1_2(),
@@ -299,5 +326,6 @@ console.log(
 	day9_1(),
 	day9_2(),
 	day10_1(),
-	day10_2()
+	day10_2(),
+	day11_1()
 )

@@ -287,11 +287,9 @@ function day11_1() {
 		for (const [i, [...row]] of map.entries()) {
 			for (const [j, c] of row.entries()) if (c != ".") {
 				const
-					n = "011122222"[Array(9).fill()
-						.filter((_, x) =>
-							x != 4 &&
-							"#0".includes(
-								map?.[i + x % 3 - 1]?.[j + ~~(x / 3) % 3 - 1]))
+					n = "011122222"[Array(8).fill()
+						.filter((_, x) => "#0".includes(
+							map?.[i + (x += 5) % 3 - 1]?.[j + ~~(x / 3) % 3 - 1]))
 						.length]
 				if (`#${c}L`[n] != c) {
 					row[j] = "1_0"[n]

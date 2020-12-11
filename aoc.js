@@ -316,12 +316,9 @@ function day11_2() {
 						let
 							x = i,
 							y = j
-						const
-							s = (dir += 5) % 3 - 1,
-							t = ~~(dir / 3) % 3 - 1
 						do {
-							x += s
-							y += t
+							x += (dir + 5) % 3 - 1
+							y += ~~((dir + 5) / 3) % 3 - 1
 						} while (map?.[x]?.[y] == ".")
 						return "#0".includes(map?.[x]?.[y])
 					})

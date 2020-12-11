@@ -304,6 +304,41 @@ function day11_1() {
 	return map.join().split("#").length - 1
 }
 
+function day11_2() {
+	const map = input(11)
+	let flag
+	while (!flag) {
+		flag = true
+		for (const [i, [...row]] of map.entries()) {
+			for (const [j, c] of row.entries()) if (c != ".") {
+				const n = "011112222"[Array(8).fill()
+					.filter((_, dir) => {
+						let
+							x = i,
+							y = j
+						const
+							s = (dir += 5) % 3 - 1,
+							t = ~~(dir / 3) % 3 - 1
+						do {
+							x += s
+							y += t
+						} while (map?.[x]?.[y] == ".")
+						return "#0".includes(map?.[x]?.[y])
+					})
+					.length]
+				if (`#${c}L`[n] != c) {
+					row[j] = "1_0"[n]
+					flag = false
+				}
+			}
+			map[i] = row
+		}
+		for (const [i, row] of map.entries())
+			map[i] = row.join("").replace(/\d/g, c => "L#"[c])
+	}
+	return map.join().split("#").length - 1
+}
+
 console.log(
 	day1_1(),
 	day1_2(),
@@ -325,5 +360,6 @@ console.log(
 	day9_2(),
 	day10_1(),
 	day10_2(),
-	day11_1()
+	day11_1(),
+	day11_2()
 )

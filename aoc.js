@@ -259,11 +259,26 @@ function day9_2() {
 
 function day10_1() {
 	const
-		counters = [, 0,, 1],
-		ratings = input(10).sort((a, b) => a - b)
+		ratings = input(10).sort((a, b) => a - b),
+		counters = [, 0,, 1]
 	for (const [i, next] of ratings.entries())
 		counters[next - (i && ratings[i - 1])]++
 	return counters[1] * counters[3]
+}
+
+function day10_2() {
+	const
+		ratings = input(10).sort((a, b) => a - b),
+		arrangements = [1]
+	for (const [i, joltage] of ratings.entries()) {
+		let acc = 0
+		for (const [j, n] of arrangements.entries())
+			joltage - [ratings[i - j - 1]] > 3
+			? arrangements.splice(j)
+			: acc += n
+		arrangements.unshift(acc)
+	}
+	return arrangements[0]
 }
 
 console.log(
@@ -285,5 +300,6 @@ console.log(
 	day8_2(),
 	day9_1(),
 	day9_2(),
-	day10_1()
+	day10_1(),
+	day10_2()
 )

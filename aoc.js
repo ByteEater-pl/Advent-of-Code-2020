@@ -336,6 +336,27 @@ function day11_2() {
 	return map.join().split("#").length - 1
 }
 
+function day12_1() {
+	let
+		pos = [0, 0],
+		heading = [1, 0]
+	function rot(v, n) {
+		while (n--) v = [-v[1], v[0]]
+		return v
+	}
+	for (let [action, ...value] of input(12)) {
+		value = value.join("")
+		for (const [i, type] of ["ENWS", "LR", "F"].entries()) {
+			const j = type.indexOf(action)
+			if (j >= 0)
+				if (i == 1) heading = rot(heading, (-1) ** j * value / 90 + 4)
+				else for (const c of pos.keys())
+					pos[c] += value * [rot([1, 0], j),, heading][i][c]
+		}
+	}
+	return Math.abs(pos[0]) + Math.abs(pos[1])
+}
+
 console.log(
 	day1_1(),
 	day1_2(),
@@ -358,5 +379,6 @@ console.log(
 	day10_1(),
 	day10_2(),
 	day11_1(),
-	day11_2()
+	day11_2(),
+	day12_1()
 )

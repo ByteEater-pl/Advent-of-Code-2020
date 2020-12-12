@@ -362,19 +362,19 @@ function day12_2() {
 	let
 		pos = [0, 0],
 		waypoint = [10, 1]
-	function lin(u, v, a) {
-		return u.map((c, i) => c + a * v[i])
-	}
 	for (let [action, ...value] of input(12)) {
 		value = value.join("")
+		function lin(u, v) {
+			return u.map((c, i) => c + value * v[i])
+		}
 		for (const [i, type] of ["ENWS", "LR", "F"].entries()) {
 			const j = type.indexOf(action)
 			if (j >= 0)
 				if (i < 2) waypoint = [
-						() => lin(waypoint, rot([1, 0], j), value),
+						() => lin(waypoint, rot([1, 0], j)),
 						() => rot(waypoint, (-1) ** j * value / 90 + 4)
 					][i]()
-				else pos = lin(pos, waypoint, value)
+				else pos = lin(pos, waypoint)
 		}
 	}
 	return Math.abs(pos[0]) + Math.abs(pos[1])

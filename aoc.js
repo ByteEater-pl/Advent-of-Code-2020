@@ -408,14 +408,10 @@ function day13_2() {
 			a = 1n,
 			b = 0n,
 			c = 0n,
-			d = 1n,
-			r
-		while (r = m % n) {
-			const q = m / n;
-			[m, n, a, b, c, d] = [n, r, c, d, a - c * q, b - d * q]
-		}
-		rem = (rem - c * mod * (BigInt(i) + rem)) % (mod * ID) / n
-		mod *= ID / n
+			d = 1n
+		while (n) [m, n, a, c] = [n, m % n, c, a - m / n * c]
+		rem = (rem - a * mod * (BigInt(i) + rem)) % (mod * ID) / m
+		mod *= ID / m
 	}
 	return (rem + mod) % mod
 }

@@ -380,6 +380,18 @@ function day12_2() {
 	return Math.abs(pos[0]) + Math.abs(pos[1])
 }
 
+function day13_1() {
+	const
+		[start, list] = input(13),
+		schedule = list.match(/\d+/g)
+	let i = 0
+	for (;;) {
+		for (const ID of schedule)
+			if ((+start + i) % ID == 0) return ID * i
+		i++
+	}
+}
+
 console.log(
 	day1_1(),
 	day1_2(),
@@ -404,5 +416,6 @@ console.log(
 	day11_1(),
 	day11_2(),
 	day12_1(),
-	day12_2()
+	day12_2(),
+	day13_1()
 )

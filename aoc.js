@@ -351,7 +351,7 @@ function day12_1() {
 			const j = type.indexOf(action)
 			if (j >= 0)
 				if (i == 1) heading = rot(heading, (-1) ** j * value / 90 + 4)
-				else for (const a of pos.keys())
+				else for (const a in pos)
 					pos[a] += value * [rot([1, 0], j),, heading][i][a]
 		}
 	}
@@ -384,12 +384,16 @@ function day13_1() {
 	const
 		[start, list] = input(13),
 		schedule = list.match(/\d+/g)
-	let i = 0
-	for (;;) {
-		for (const ID of schedule)
-			if ((+start + i) % ID == 0) return ID * i
-		i++
+	function wait(n) {
+		n = schedule[n]
+		return (n - 1) * start % n
 	}
+	let
+		i = 0,
+		j = 0
+	while (++j in schedule)
+		if (wait(j) < wait(i)) i = j
+	return schedule[i] * wait(i)
 }
 
 console.log(

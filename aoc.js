@@ -396,6 +396,30 @@ function day13_1() {
 	return schedule[i] * wait(i)
 }
 
+function day13_2() {
+	let
+		mod = 1n,
+		rem = 0n
+	for (let [i, ID] of input(13)[1].split(",").entries()) if (+ID) {
+		ID = BigInt(ID)
+		let
+			m = mod,
+			n = ID,
+			a = 1n,
+			b = 0n,
+			c = 0n,
+			d = 1n,
+			r
+		while (r = m % n) {
+			const q = m / n;
+			[m, n, a, b, c, d] = [n, r, c, d, a - c * q, b - d * q]
+		}
+		rem = (rem - c * mod * (BigInt(i) + rem)) % (mod * ID) / n
+		mod *= ID / n
+	}
+	return (rem + mod) % mod
+}
+
 console.log(
 	day1_1(),
 	day1_2(),
@@ -421,5 +445,6 @@ console.log(
 	day11_2(),
 	day12_1(),
 	day12_2(),
-	day13_1()
+	day13_1(),
+	day13_2()
 )

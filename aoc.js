@@ -406,9 +406,7 @@ function day13_2() {
 			m = mod,
 			n = ID,
 			a = 1n,
-			b = 0n,
-			c = 0n,
-			d = 1n
+			c = 0n
 		while (n) [m, n, a, c] = [n, m % n, c, a - m / n * c]
 		rem = (rem - a * mod * (BigInt(i) + rem)) % (mod * ID) / m
 		mod *= ID / m

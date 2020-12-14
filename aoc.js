@@ -419,11 +419,29 @@ function day14_1() {
 	let mask
 	for (const l of input(14)) {
 		const [, target, val] = /(\d*)]? = (.*)/.exec(l)
-		if (target.length) mem.set(target,
+		if (target > "") mem.set(target,
 			mask.replace(/X/g, (_, i) => val / 2 ** (35 - i) & 1))
 		else mask = val
 	}
 	return [...mem.values()].reduce((a, b) => a + parseInt(b, 2), 0)
+}
+
+function day14_2() {
+	const mem = new Map
+	let mask
+	for (const l of input(14)) {
+		const [, target, val] = /(\d*)]? = (.*)/.exec(l)
+		if (target > "")
+			!function poke(addr, i) {
+				if (i--) for (const b of
+					{0: [target / 2 ** i & 1], 1: [1], X: [0, 1]}[mask[35 - i]]
+					)
+					poke(addr + b, i)
+				else mem.set(addr, val)
+			}("", 36)
+		else mask = val
+	}
+	return [...mem.values()].reduce((a, b) => a + +b, 0)
 }
 
 console.log(
@@ -453,5 +471,6 @@ console.log(
 	day12_2(),
 	day13_1(),
 	day13_2(),
-	day14_1()
+	day14_1(),
+	day14_2()
 )

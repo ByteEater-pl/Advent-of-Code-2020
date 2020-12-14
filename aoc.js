@@ -414,6 +414,18 @@ function day13_2() {
 	return (rem + mod) % mod
 }
 
+function day14_1() {
+	const mem = new Map
+	let mask
+	for (const l of input(14)) {
+		const [, target, val] = /(\d*)]? = (.*)/.exec(l)
+		if (target.length) mem.set(target,
+			mask.replace(/X/g, (_, i) => val / 2 ** (35 - i) & 1))
+		else mask = val
+	}
+	return [...mem.values()].reduce((a, b) => a + parseInt(b, 2), 0)
+}
+
 console.log(
 	day1_1(),
 	day1_2(),
@@ -440,5 +452,6 @@ console.log(
 	day12_1(),
 	day12_2(),
 	day13_1(),
-	day13_2()
+	day13_2(),
+	day14_1()
 )

@@ -444,6 +444,15 @@ function day14_2() {
 	return [...mem.values()].reduce((a, b) => a + +b, 0)
 }
 
+function day15_1() {
+	const numbers = "13,0,10,12,1,5,8".split(",").reverse()
+	do {
+		const i = numbers.indexOf(numbers[0], 1)
+		numbers.unshift(`${(i > 0) * i}`)
+	} while (numbers.length < 2020)
+	return numbers[0]
+}
+
 console.log(
 	day1_1(),
 	day1_2(),
@@ -472,5 +481,6 @@ console.log(
 	day13_1(),
 	day13_2(),
 	day14_1(),
-	day14_2()
+	day14_2(),
+	day15_1()
 )
